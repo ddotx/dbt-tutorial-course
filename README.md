@@ -40,4 +40,54 @@ If I update this repository, and you want to update your forked repository with 
 2. Linked the above, don't make changes to the `/answers` folder - or if you do, make sure you delete them afterwards. If I update the repository it's very likely I'll be updating this folder and it'll make things a lot harder for you!
 3. **If you've made changes, and you sync your fork with my changes, don't discard your commits!** This will get rid of all of your progress. I'd advise creating a new branch before syncing in case this happens
 
+```bash
 gcloud auth login --no-launch-browser
+
+gcloud info
+gcloud config list
+
+export BIGQUERY_PROJECT="ddotx-learn"
+
+dbt deps # -> dbt_project.yml -> dbt_packages/
+
+# run model
+dbt run -s stg_ecommerce__orders --profiles-dir .
+
+# run all models
+dbt run --profiles-dir .
+
+dbt clean
+
+dbt --profiles-dir . compile
+```
+
+List of extensions which should be recommended for users of this workspace.
+
+```
+	"recommendations": [
+		"innoverio.vscode-dbt-power-user",
+		"samuelcolvin.jinjahtml",
+		"maciejdems.add-to-gitignore",
+		"redhat.vscode-yaml"
+	],
+```
+
+lesson
+
+```sh
+dbt init
+
+# project name = lessons
+# threads = 60 (run 60 SQL files)
+
+dbt debug --config-dir
+
+cd answers
+dbt clean && dbt deps
+```
+
+- dbt clean deletes everything in your targets/ and packages/ folders
+
+- dbt deps installs all of the packages specified in packages.yml into your packages/ folder
+
+- Your targets/ folder contains any compiled / run SQL amongst other things created whenever you do a dbt command like dbt run or dbt test
